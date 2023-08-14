@@ -1,0 +1,127 @@
+#!/bin/bash
+
+# Scan devices listed at DEVLIST looking for fs label staring with abdlfs_st_
+# extract the final parte of label as ID (abdlfs_st_ID) and mounts filesystem at /storate/ID
+# after mounting each filesystem found looks for AbdLFSExtras dir and creates links in opt to each subdir of AbdLFSExtras
+# Adding to PATH, LF_LIBRARY_PATH according 
+
+STORAGE=/storage
+DEVLIST="vda vda1 vda2 vdb vdb1 vdb2 sda sda1 sda2 sdb sdb1 sdb2 hda hda1 hda2 hdb hdb1 hdb2"
+
+if [ ! -d $STORAGE ] ; then
+	mkdir -p $STORAGE
+fi
+
+function msg()
+{
+	echo "Devmount:" $@
+}
+
+function process()
+{
+	DIR=$1
+	if [ -e $DIR/passwd ] ; then
+		msg "Found $DIR/passwd"
+		msg "Overwriting system passwd, shadow and group"
+		cp $DIR/passwd /etc/passwd
+		cp $DIR/shadow /etc/shadow
+		cp $DIR/group /etc/group
+		chmod 644 /etc/passwd
+		chmod 400 /etc/shadow
+		chmod 644 /etc/group
+	fi
+
+	if [ -x $DIR/startup.sh ] ; then
+		msg "Found executable $DIR/startup.sh"
+		$DIR/startup.sh
+		msg "Exec of $DIR/startup.sh finished"
+	fi
+
+	if [ -d $DIR/AbdLFSExtras ] ; then
+		msg "Found $DIR/AbdLFSExtras"
+		cd $DIR/AbdLFSExtras
+		for pkg in *
+		do
+			msg "Package $pkg found"
+			ln -s $DIR/AbdLFSExtras/$pkg /opt/$pkg
+			if [ -d /opt/$pkg/bin ]; then
+				(
+				  echo "# Added by devmount"
+				  echo 'PATH=$PATH:'"/opt/$pkg/bin"
+				) >> /etc/profile
+			fi
+			if [ -d /opt/$pkg/lib ]; then
+			(
+				  echo "# Added by devmount"
+				  echo "/opt/$pkg/lib"
+				) >> /etc/ld.so.conf
+			fi
+			for mandir in $(find . -type d -name man)
+			do
+				(
+				  echo "MANDATORY_MANPATH $DIR/AbdLFSExtras/$pkg/$mandir"
+				  echo "MANDB_MAP $DIR/AbdLFSExtras/$pkg/$mandir /var/cache/man" 
+				) >> /etc/man_db.conf	
+			done
+		done
+	fi
+}
+
+function getLabel()
+{
+	dev=$1
+	LABEL=`e2label $dev 2> /dev/null`
+	if [ -z "$LABEL" ]
+	then
+		LABEL=`sqshlabel $dev 2> /dev/null`
+	fi
+	echo "$LABEL"
+}
+
+msg "Looking for /sqsh/AbdLFSExtras.sq.img"
+if [ -f /sqsh/AbdLFSExtras.sq.img ]
+then
+	msg "Found /sqsh/AbdLFSExtras.sq.img"
+	LABEL=`getLabel /sqsh/AbdLFSExtras.sq.img`
+	if echo "$LABEL" | grep "abdlfs_st_" &> /dev/null
+	then
+		msg "Storage $LABEL found at device /dev/$dev"
+		ID=`echo "$LABEL" | sed -e 's/abdlfs_st_//'`
+		msg "Mounting at $STORAGE/$ID"
+		mkdir -p $STORAGE/$ID
+		if mount -o loop /sqsh/AbdLFSExtras.sq.img $STORAGE/$ID
+		then
+			process $STORAGE/$ID
+		fi
+	fi
+fi
+
+msg "Looking for storage at devs ($DEVLIST)"
+for dev in $DEVLIST
+do
+	LABEL=`getLabel /dev/$dev`
+	if msg "$LABEL" | grep "abdlfs_st_" &> /dev/null
+	then
+		msg "Storage $LABEL found at device /dev/$dev"
+		ID=`echo "$LABEL" | sed -e 's/abdlfs_st_//'`
+		msg "Mounting at $STORAGE/$ID"
+		mkdir -vp $STORAGE/$ID
+		if mountpoint -q $STORAGE/$ID
+		then
+			msg "$STORAGE/$ID already a mount point"
+		else
+			if mount /dev/$dev $STORAGE/$ID
+			then
+				process $STORAGE/$ID
+			fi
+		fi
+	fi
+	if echo "$LABEL" | grep "abdlfs_swap" &> /dev/null
+	then
+		swapon /dev/$dev
+	fi
+done
+
+# process changes in /etc/ld.so.conf
+ldconfig
+

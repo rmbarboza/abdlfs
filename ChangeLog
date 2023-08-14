@@ -1,0 +1,200 @@
+lfs-s1.sh-# 5.4. Binutils-2.19.1
+lfs-s1.sh:# Upgraded to
+lfs-s1.sh-# 5.4. Binutils-2.24
+--
+lfs-s1.sh-# 5.5. Gcc-4.4.1 - Pass 1
+lfs-s1.sh:# Upgraded to
+lfs-s1.sh-# 5.5. Gcc-4.9.1 - Pass 1 (just for test)
+lfs-s1.sh:# Upgraded to
+lfs-s1.sh-# 5.5. Gcc-5.2.0 - Pass 1
+--
+lfs-s1.sh-# 5.6. Linux 2.6.30.2 Api Headers
+lfs-s1.sh:# Upgraded to
+lfs-s1.sh-# 5.6. Linux 3.10.104 Api Headers
+lfs-s1.sh:# Upgraded to
+lfs-s1.sh-# 5.6. Linux 3.16.61 Api Headers
+--
+lfs-s1.sh-# 5.7. Glibc-2.10.1
+lfs-s1.sh:# Upgraded to
+lfs-s1.sh-# 5.7. Glibc-2.20 (test)
+lfs-s1.sh:# Upgraded to
+lfs-s1.sh-# 5.7. Glibc-2.22 (test)
+lfs-s1.sh:# Upgraded to
+lfs-s1.sh-# 5.7. Glibc-2.23
+--
+lfs-s1.sh-# Libstdc++-4.4.1 
+lfs-s1.sh:# Upgraded to
+lfs-s1.sh-# Libstdc++-5.2.0
+--
+lfs-s1.sh-# 5.9. Binutils-2.19.1 - Pass 2
+lfs-s1.sh:# Upgraded to
+lfs-s1.sh-# 5.9. Binutils-2.24 - Pass 2
+--
+lfs-s1.sh-# 5.10. GCC-4.4.1 - pass 2
+lfs-s1.sh:# Upgraded to
+lfs-s1.sh-# 5.10. GCC-4.9.1 - pass 2 (just for test)
+lfs-s1.sh:# Upgraded to
+lfs-s1.sh-# 5.10. GCC-5.2.0 - Pass 2
+--
+lfs-s1.sh-# 5.15. Bash-4.0
+lfs-s1.sh:# Upgraded to
+lfs-s1.sh-# 5.15. Bash-4.4.18
+--
+lfs-s1.sh-# 5.23. Gzip-1.3.12
+lfs-s1.sh:# Upgraded to
+lfs-s1.sh-# 5.23. Gzip-1.6
+--
+lfs-s1.sh-# 5.25. Make-3.81
+lfs-s1.sh:# Upgraded to
+lfs-s1.sh-# 5.25. Make-4.0
+--
+lfs-s2.sh-# 6.7. Linux-2.6.30.2 API Headers
+lfs-s2.sh:# Upgraded to
+lfs-s2.sh-# 6.7. Linux-3.10.104 API Headers
+lfs-s2.sh:# Upgraded to
+lfs-s2.sh-# 6.7. Linux-3.16.61 API Headers
+--
+lfs-s2.sh-# 6.9. Glibc-2.10.1
+lfs-s2.sh:# Upgraded to
+lfs-s2.sh-# 6.9. Glibc-2.20 (test)
+lfs-s2.sh:# Upgraded to 
+lfs-s2.sh-# 6.9. Glibc-2.22 (test)
+lfs-s2.sh:# Upgraded to 
+lfs-s2.sh-# 6.9. Glibc-2.23 
+--
+lfs-s2.sh-# 6.12. Binutils-2.19.1
+lfs-s2.sh:# Upgraded to
+lfs-s2.sh-# 6.12. Binutils-2.24
+--
+lfs-s2.sh-# 6.13. GMP-4.3.1
+lfs-s2.sh:# Upgraded to
+lfs-s2.sh-# 6.13. GMP-6.0.0a
+--
+lfs-s2.sh-# 6.14. MPFR-2.4.1
+lfs-s2.sh:# Upgraded to
+lfs-s2.sh-# 6.14. MPFR-3.1.2
+lfs-s2.sh:# Upgraded to
+lfs-s2.sh-# 6.14. MPFR-3.1.3
+--
+lfs-s2.sh-# 6.14b MPC-1.0.2
+lfs-s2.sh:# Upgraded to
+lfs-s2.sh-# 6.14b MPC-1.0.3
+--
+lfs-s2.sh-# 6.15. GCC-4.4.1
+lfs-s2.sh:# Upgraded to
+lfs-s2.sh-# 6.15. GCC-4.9.1 - pass 2 (just for test)
+lfs-s2.sh:# Upgraded to
+lfs-s2.sh-# 6.15. GCC-5.2.0
+--
+lfs-s2.sh-# 6.17. Pkg-config-0.23
+lfs-s2.sh:# Upgraded to
+lfs-s2.sh-# 6.17. Pkg-config-0.28
+--
+lfs-s2.sh-# 6.20. E2fsprogs-1.41.8
+lfs-s2.sh:# Upgraded 
+lfs-s2.sh-# 6.20. E2fsprogs-1.42.13
+--
+lfs-s2.sh-# 6.25. Procps-3.2.8
+lfs-s2.sh:# Upgraded to
+lfs-s2.sh-# 6.25. Procps-ng-3.3.1
+--
+lfs-s2.sh-# 6.28. Bash-4.0
+lfs-s2.sh:# Upgraded to
+lfs-s2.sh-# 6.28. Bash-4.4.18
+--
+lfs-s2.sh-# 6.43. Gzip-1.3.12
+lfs-s2.sh:# Upgraded to
+lfs-s2.sh-# 6.43. Gzip-1.6
+--
+lfs-s2.sh-# 6.44. IPRoute2-2.6.29-1
+lfs-s2.sh:# Upgraded to
+lfs-s2.sh-# 6.44. IPRoute2-3.16.0
+--
+lfs-s2.sh-# 6.47. Make-3.81
+lfs-s2.sh:# Upgraded to
+lfs-s2.sh-# 6.47. Make-4.0
+--
+lfs-s2.sh-# 6.49. Module-Init-Tools-3.10
+lfs-s2.sh:# Upgraded to
+lfs-s2.sh-# 6.49. Module-Init-Tools-3.12
+--
+lfs-s2.sh-# 6.54. Sysvinit-2.86
+lfs-s2.sh:# Upgraded to
+lfs-s2.sh-# 6.54. Sysvinit-2.88dsf
+--
+lfs-s3-ext.sh-# Libpcap-1.0.0
+lfs-s3-ext.sh:# Upgraded to
+lfs-s3-ext.sh-# Libpcap-1.7.4o
+--
+lfs-s4.sh-# Gdb-7.0
+lfs-s4.sh:# Upgraded to
+lfs-s4.sh-# Gdb-7.8.2
+--
+lfs-s3-ext.sh:# Added
+lfs-s3-ext.sh-# strace-4.9
+--
+lfs-s3-ext.sh:# Added
+lfs-s3-ext.sh-# lrzsz-0.12.20
+--
+lfs-s3-ext.sh:# Added
+lfs-s3-ext.sh-# Lm-sensors-3-5-0
+--
+lfs-s3-ext.sh:# Added
+lfs-s3-ext.sh-# Parted-3.1
+--
+lfs-s3-ext.sh:# Added
+lfs-s3-ext.sh-# Iptables-1.4.21
+--
+lfs-s3-ext.sh:# Added
+lfs-s3-ext.sh-# Wget-1.12
+--
+lfs-s3-ext.sh:# Added
+lfs-s3-ext.sh-# Dmidecode-2.11
+--
+lfs-s3-ext.sh:# Added
+lfs-s3-ext.sh-# Pciutils-3.1.4
+--
+lfs-s3-ext.sh:# Added
+lfs-s3-ext.sh-# Smartmontools-6.3
+--
+lfs-s4.sh:# Added dev /opt 
+lfs-s4.sh-# 5.27. Perl-5.10.0
+--
+lfs-s4.sh:# Added dev /opt
+lfs-s4.sh-# Cross Binutils-2.24
+--
+lfs-s4.sh:# Added dev /opt
+lfs-s4.sh-# Cross Kernel Header Files
+--
+lfs-s4.sh:# Added dev /opt
+lfs-s4.sh-# Cross Gcc-5.2
+--
+lfs-s4.sh:# Added dev
+lfs-s4.sh-# Squashfs-4.4
+--
+lfs-s4.sh:# Added dev
+lfs-s4.sh-# Cdrtools-3.01 (mkisofs)
+--
+lfs-s4.sh:# Added dev /opt
+lfs-s4.sh-# Cmake-3.19.6
+--
+lfs-s4.sh:# Added dev /opt
+lfs-s4.sh-# Python
+--
+lfs-s4.sh:# Added dev /opt
+lfs-s4.sh-# Llvm-11.0.1
+--
+lfs-s3-ext.sh-# quagga
+lfs-s3-ext.sh:# Removed
+--
+lfs-s4.sh-# docker files
+lfs-s4.sh:# Removed
+--
+lfs-s4.sh-# Java 1.6.0_17 
+lfs-s4.sh:# Removed
+--
+lfs-s4.sh-# Old developer (perl2exe)
+lfs-s4.sh:# Removed
+--
+lfs-s4.sh-# Cvsnt-2.5.04.3236
+lfs-s4.sh:# Removed

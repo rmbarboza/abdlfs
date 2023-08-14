@@ -1,0 +1,18 @@
+
+Toolchaining, SO, Assembler, Bootstraping is part of a very interesting field of computer technologies/science.
+All this gives a very nice understand of underlays levels in software development and computer/OS/Apps working.
+
+For those who want to give it a shot:
+
+Topics to study:
+
+1. The dynamic linker (ls.so or ld-linux.so)
+2. The C runtime (crt*.o)
+3. Egg and Chicken problem with Glibc and GCC 
+	GCC needs crt1.o provided by GLIBC, but glibc needs GCC to be compiled
+4. Toolchaining GCC or others compiling systems
+5. Bootstraping
+
+Mauricio Abud
+
+
