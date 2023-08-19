@@ -1689,7 +1689,7 @@ EOF
 
 	cat > /etc/hosts << "EOF"
 # Begin /etc/hosts (network card version)
-127.0.0.1 localhost trafip
+127.0.0.1 localhost abdlfs
 # End /etc/hosts (network card version)
 EOF
 	

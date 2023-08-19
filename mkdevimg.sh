@@ -8,11 +8,7 @@ KARCH=x86
 cdir=`pwd`
 SCRIPTNAME=${BASH_SOURCE[0]}
 
-CVSROOT=`dirname $cdir`
-CVSROOT=`dirname $CVSROOT`
-WCACHE=$CVSROOT/wcache
 HOSTARCH=$(arch)
-ABLPATH=$CVSROOT/software/abl
 
 error_trap() {
 	echo -e ""
@@ -89,6 +85,16 @@ Usage()
 		esac
 	done
 
+	if [ "$WCACHE" = "" ]; then
+		echo "use -w <package dir>"
+		exit -1
+	fi
+
+	if [ ! -d "$WCACHE" ]; then
+		echo "$WCACHE is not a directory"
+		exit -1
+	fi
+
 	if [ ! -x $ABLPATH/mkimg.sh ]; then
 		echo "Missing ABL at $ABLPATH"
 		echo "Could not find $ABLPATH/mkimg.sh"
@@ -113,6 +119,10 @@ Usage()
 	fi
 
 	if [ ! -d linux-$KVERSION ]; then
+		if [ ! -f "$WCACHE/linux-$KVERSION.tar.xz" ]; then
+			echo "Could not find $WCACHE/linux-$KVERSION.tar.xz"
+			exit -1
+		fi
 		echo "Uncompressing: $WCACHE/linux-$KVERSION.tar.xz"
 		tar xf $WCACHE/linux-$KVERSION.tar.xz
 	fi
