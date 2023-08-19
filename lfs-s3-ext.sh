@@ -169,7 +169,7 @@ EOF
 
 	startStep cronie-1.4.4
 	tar -xf cronie-1.4.4.tar.gz; cd cronie-1.4.4
-	./configure --prefix=/usr --localstatedir=/var
+	./configure --prefix=/usr --localstatedir=/var --sysconfdir=/etc
 
 	make
 	make install
@@ -186,6 +186,7 @@ EOF
 	done
 
 	mkdir -pv /usr/var/spool/cron
+	mkdir -pv /etc/cron.d
 
 	cd $EXTRAS; rm -fr cronie-1.4.4
 

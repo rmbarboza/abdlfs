@@ -858,6 +858,7 @@ EOF
 
 touch $LFS/var/run/utmp $LFS/var/log/{btmp,lastlog,wtmp}
 
+chmod -v 600 $LFS/var/log/btmp 
 # group 13 -> expected to be "utmp"
 chgrp -v 13 $LFS/var/run/utmp $LFS/var/log/lastlog
 chmod -v 664 $LFS/var/run/utmp $LFS/var/log/lastlog

@@ -1685,15 +1685,13 @@ EOF
 
 # 7.11. Configuring the localnet Script
 
-	echo "HOSTNAME=trafip" > /etc/sysconfig/network
+	echo "HOSTNAME=abdlfs" > /etc/sysconfig/network
 
 	cat > /etc/hosts << "EOF"
 # Begin /etc/hosts (network card version)
 127.0.0.1 localhost trafip
 # End /etc/hosts (network card version)
 EOF
-
-
 	
 	# Abud - fixme
 	#for NIC in /sys/class/net/eth0 /sys/class/net/lo ; do \
@@ -1727,8 +1725,10 @@ EOF
 Welcome to AbdLFS
 
    - /usr is a read-only squashed file-system.
-   - Install extra software, if needed, using /opt/extras as prefix (already in paths)
-   - Large packages are installed in per package directories in /opt
+   - Large packages can be installed in per package directories in /opt
+   - Remember:
+   -    Reboot will remove everything installed in /opt
+   -    To make it permanent move to /storage/0/AbdLFSExtras and devmount will make apropriate links
 
 EOF
 
