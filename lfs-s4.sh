@@ -619,55 +619,51 @@ echo
 	# llvm is not fundamental for a 64bits system, neither for 32bits under 64bits kernel
 	#
 
-	if [ "$SYSTEM_ARCH" = "x86_64" ]; then
-		echo "Supressing build of llvm in system running under x86_64 kernel"
-	else
-		PATH=$PATH:/opt/llvm11/bin
-		LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/llvm11/lib
-		export PATH LD_LIBRARY_PATH
+	PATH=$PATH:/opt/llvm11/bin
+	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/llvm11/lib
+	export PATH LD_LIBRARY_PATH
 
-		tar -xJf llvm-project-11.0.1.src.tar.xz
-		cd llvm-project-11.0.1.src
-		mkdir build-llvm
-		cd build-llvm/
-		cmake -G 'Unix Makefiles' \
-			-DLLVM_ENABLE_PROJECTS='clang;lld' \
-			-DCMAKE_INSTALL_PREFIX=/opt/llvm11 \
-			-DLLVM_TARGETS_TO_BUILD="WebAssembly;X86;ARM;Mips" \
-			-DLLVM_BUILD_LLVM_DYLIB=on \
-			-DLLVM_LINK_LLVM_DYLIB=on \
-			-DCMAKE_BUILD_TYPE=Release \
-			../llvm
-		make
-		make install
-		cd ..
+	tar -xJf llvm-project-11.0.1.src.tar.xz
+	cd llvm-project-11.0.1.src
+	mkdir build-llvm
+	cd build-llvm/
+	cmake -G 'Unix Makefiles' \
+		-DLLVM_ENABLE_PROJECTS='clang;lld' \
+		-DCMAKE_INSTALL_PREFIX=/opt/llvm11 \
+		-DLLVM_TARGETS_TO_BUILD="WebAssembly;X86;ARM;Mips" \
+		-DLLVM_BUILD_LLVM_DYLIB=on \
+		-DLLVM_LINK_LLVM_DYLIB=on \
+		-DCMAKE_BUILD_TYPE=Release \
+		../llvm
+	make
+	make install
+	cd ..
 
-		# No use for static llvm library set (it's for llvm based tools development).
-		rm -rf /opt/llvm11/lib/*.a
-		(
-			cd /opt/llvm11/bin
-			mkdir -pv /AbdLFSRemoved
-			tar -cJf /AbdLFSRemoved/llvm-extras.tar.xz \
-				bugpoint llvm-tblgen \
-				llvm-xray obj2yaml \
-				llvm-exegesis dsymutil \
-				c-index-test
-			rm -f bugpoint llvm-tblgen llvm-xray obj2yaml llvm-exegesis dsymutil c-index-test
-		)
+	# No use for static llvm library set (it's for llvm based tools development).
+	rm -rf /opt/llvm11/lib/*.a
+	(
+		cd /opt/llvm11/bin
+		mkdir -pv /AbdLFSRemoved
+		tar -cJf /AbdLFSRemoved/llvm-extras.tar.xz \
+			bugpoint llvm-tblgen \
+			llvm-xray obj2yaml \
+			llvm-exegesis dsymutil \
+			c-index-test
+		rm -f bugpoint llvm-tblgen llvm-xray obj2yaml llvm-exegesis dsymutil c-index-test
+	)
 
-		# Updating /etc/man_db.conf
-		echo "MANDATORY_MANPATH                       /opt/llvm11/share/man" >> /etc/man_db.conf
-		echo "MANDB_MAP		/opt/llvm11/share/man	/var/cache/man" >> /etc/man_db.conf
+	# Updating /etc/man_db.conf
+	echo "MANDATORY_MANPATH                       /opt/llvm11/share/man" >> /etc/man_db.conf
+	echo "MANDB_MAP		/opt/llvm11/share/man	/var/cache/man" >> /etc/man_db.conf
 
-		# Updating the /etc/profile
-		( echo
-		  echo "#included by AbdLFS step llvm-project-11.0.1"
-		  echo "export PATH=\$PATH:/opt/llvm11/bin"
-		  echo "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:/opt/llvm11/lib"
-		) >> /etc/profile
+	# Updating the /etc/profile
+	( echo
+	  echo "#included by AbdLFS step llvm-project-11.0.1"
+	  echo "export PATH=\$PATH:/opt/llvm11/bin"
+	  echo "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:/opt/llvm11/lib"
+	) >> /etc/profile
 
-		cd ..; rm -rf llvm-project-11.0.1.src
-	fi
+	cd ..; rm -rf llvm-project-11.0.1.src
 
 echo
 echo "#########################################################################"
