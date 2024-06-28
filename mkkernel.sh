@@ -74,6 +74,7 @@ echo "Starting: $SCRIPTNAME $(date +%Y%m%d-%H%M%S)"
 
 	GCCTARGET=`gcc -dumpmachine`
 	NEWTARGET=$TGT-pc-linux-gnu
+	#NEWTARGET=$TGT-unknown-linux-gnu
 
 	echo "Cpio image: $LFS_CPIO_FULLPATH"
 	echo "Kenrel ARCH: $KARCH"

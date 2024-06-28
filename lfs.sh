@@ -1,9 +1,15 @@
 #!/bin/sh
 
-# lfs-s1.sh	-	Toolchain
-# lfs-s2.sh	-	Basic System
-# lfs-s3-ext.sh	-	Common Extensions (dev/pro)
-# lfs-s4.sh	-	Dev Only Extensions
+# lfs-s1.sh		-	Toolchain
+# lfs-s2.sh		-	Basic System
+# lfs-s3-ext.sh		-	Common Extensions (dev/pro)
+# lfs-s4.sh		-	Dev Only Extensions
+# lfs-s4-cross.sh	-	Cross Tools Extensions
+
+export KERNEL_VERSION="linux-3.16.61"
+#export KERNEL_VERSION="linux-3.19.8"
+
+#BUILD_CROSS_TOOLS="yes"
 
 error_trap() {
 	echo -e "\nERROR: Error trapped!\n"
@@ -37,7 +43,7 @@ chown -v root.root $LFS
 
 # Toolschain creation
 echo; echo 'AbdLFS: Executing lfs-s1.sh';echo
-env -i LFS=$LFS HOME=$HOME TERM=$TERM PS1='\u:\w\$ ' WCACHE="$WCACHE" ./lfs-s1.sh
+env -i KERNEL_VERSION="$KERNEL_VERSION" LFS=$LFS HOME=$HOME TERM=$TERM PS1='\u:\w\$ ' WCACHE="$WCACHE" ./lfs-s1.sh
 
 mount -vt devpts devpts $LFS/dev/pts
 mount -vt tmpfs shm $LFS/dev/shm
@@ -46,13 +52,13 @@ mount -vt sysfs sysfs $LFS/sys
 
 # System creation
 echo; echo 'AbdLFS: Executing lfs-s2.sh';echo
-chroot "$LFS" $LFS/tools/bin/env -i LFS="$LFS" HOME=/root TERM="$TERM" PS1='\u:\w\$ ' \
+chroot "$LFS" $LFS/tools/bin/env -i KERNEL_VERSION="$KERNEL_VERSION" LFS="$LFS" HOME=/root TERM="$TERM" PS1='\u:\w\$ ' \
 	PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin:/prereqs/bin $LFS/tools/bin/bash --login +h \
 	-c 'source /lfs-s2.sh'
 
 # Common extensions
 echo; echo 'AbdLFS: Executing lfs-s3-ext.sh';echo
-chroot "$LFS" /usr/bin/env -i  HOME=/root TERM="$TERM" PS1='\u:\w\$ ' \
+chroot "$LFS" /usr/bin/env -i KERNEL_VERSION="$KERNEL_VERSION" HOME=/root TERM="$TERM" PS1='\u:\w\$ ' \
 	PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin /bin/bash --login +h \
 	-c 'source /lfs-s3-ext.sh'
 
@@ -100,10 +106,23 @@ mount -vt sysfs sysfs $LFS/sys
 ### lfs-s4.sh is reserved to dev only stuff
 ###
 echo; echo 'AbdLFS: Executing lfs-s4.sh';echo
-chroot "$LFS" /usr/bin/env -i  HOME=/root TERM="$TERM" PS1='\u:\w\$ ' \
+chroot "$LFS" /usr/bin/env -i KERNEL_VERSION="$KERNEL_VERSION" HOME=/root TERM="$TERM" PS1='\u:\w\$ ' \
 	PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin /bin/bash --login +h \
 	-c 'source /lfs-s4.sh'
 ### End of dev extras part
+
+### Dev extra: Cross Compiling env
+###
+### lfs-s4-cross.sh
+###
+if [ "$BUILD_CROSS_TOOLS" == "yes" ]
+then
+	echo; echo 'AbdLFS: Executing lfs-s4-cross.sh';echo
+	chroot "$LFS" /usr/bin/env -i KERNEL_VERSION="$KERNEL_VERSION" HOME=/root TERM="$TERM" PS1='\u:\w\$ ' \
+		PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin /bin/bash --login +h \
+		-c 'source /lfs-s4-cross.sh'
+fi
+### End of Dev extras: Cross part
 
 # Umounting for strip unneeded stuff and packaging
 umount $LFS/dev/pts
