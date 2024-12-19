@@ -50,8 +50,8 @@ echo
 # Upgraded to
 # 6.7. Linux-3.16.61 API Headers
 
-	startStep 6.7-Linux-3.16.61-api-headers
-	tar -xJf linux-3.16.61.tar.xz; cd linux-3.16.61
+	startStep 6.7-"$KERNEL_VERSION"-api-headers
+	tar -xJf "$KERNEL_VERSION".tar.xz; cd "$KERNEL_VERSION"
 	make mrproper
 	if [ DD${MKTEST}DD = DDYESDD ]
 	then
@@ -59,7 +59,7 @@ echo
 	fi
 	make INSTALL_HDR_PATH=dest headers_install
 	cp -rv dest/include/* /usr/include
-	cd /sources; rm -rf linux-3.16.61
+	cd /sources; rm -rf "$KERNEL_VERSION"
 
 # 6.8 manpages skiped - Abud
 
@@ -1537,10 +1537,14 @@ EOF
 # Added
 # Linux-3.16.61 perf
 
-	startStep 6.7-Linux-3.16.61-perf
-	tar -xJf linux-3.16.61.tar.xz; cd linux-3.16.61
+	startStep 6.7-"$KERNEL_VERSION"-perf
+	tar -xJf "$KERNEL_VERSION".tar.xz; cd "$KERNEL_VERSION"
+	if [ "$KERNEL_VERSION" = "linux-3.19.8" ]
+	then
+		patch -s -p1 < ../linux-3.19.8-perf-builtin-report.patch
+	fi
 	make -C tools/perf DESTDIR=/usr install
-	cd /sources; rm -rf linux-3.16.61
+	cd /sources; rm -rf "$KERNEL_VERSION"
 
 # Added bnx2-firmware
 

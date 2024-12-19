@@ -106,6 +106,7 @@ echo
 	echo
 	echo ">> Linking packages in list-dev.txt to sources"
 	cp -a lfs-s4.sh $LFS/
+	cp -a lfs-s4-cross.sh $LFS/
 	cp -a devsetup $LFS/
 	mkdir -v $LFS/sources_dev
 	chmod -v a+wt $LFS/sources_dev
@@ -249,18 +250,18 @@ echo
 # Upgraded to
 # 5.6. Linux 3.16.61 Api Headers
 
-	startStep "linux-3.16.61.tar.xz - Api-Headers"
+	startStep "$KERNEL_VERSION"".tar.xz - Api-Headers"
 
-	tar -xJf linux-3.16.61.tar.xz
+	tar -xJf "$KERNEL_VERSION".tar.xz
 
-	cd linux-3.16.61
+	cd "$KERNEL_VERSION"
 
 	make mrproper
 	make PATH=$tmpperldir/bin:$PATH headers_check
 	make PATH=$tmpperldir/bin:$PATH INSTALL_HDR_PATH=dest headers_install
 	cp -rv dest/include/* $LFS/tools/include
 
-	cd ..; rm -rf linux-3.16.61
+	cd ..; rm -rf "$KERNEL_VERSION"
 
 # 5.7. Glibc-2.10.1
 # Upgraded to

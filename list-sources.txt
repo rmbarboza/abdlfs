@@ -27,6 +27,8 @@ less-429.tar.gz
 lfs-bootscripts-20090812.tar.bz2
 libtool-2.2.6a.tar.gz
 linux-3.16.61.tar.xz
+linux-3.19.8.tar.xz
+linux-3.19.8-perf-builtin-report.patch
 m4-1.4.13.tar.bz2
 make-4.0.tar.gz
 module-init-tools-3.12.tar.bz2
